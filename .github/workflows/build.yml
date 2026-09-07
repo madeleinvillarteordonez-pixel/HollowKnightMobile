@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout repository
@@ -29,15 +29,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev \
-            zlib1g-dev libssl-dev openssl libffi-dev libgdbm-dev libshare-dev \
-            git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixin-dev libsdl2-ttf-dev \
-            libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev \
-            openjdk-17-jdk unzip autoconf libtool ccache libncurses5:i386 zip cython3
+            zlib1g-dev libssl-dev openssl libffi-dev libgdbm-dev \
+            git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev \
+            libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev \
+            openjdk-17-jdk unzip autoconf libtool ccache zip python3-pip
         pip install --upgrade buildozer cython
 
     - name: Build APK with Buildozer
       run: |
-        buildozer -v android debug
+        yes | buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
